@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title> Street Food Ordering System</title>
+    <link rel="icon" href="{% static 'images/bg_1.png' %}" type="image/x-icon">
+
+</head>
+{% include 'header.html' %}
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+		      <a class="navbar-brand" href=""><span class="flaticon-pizza-1 mr-1"></span>Street Food<br><small>Ordering System</small></a>
+		      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+		        <span class="oi oi-menu"></span> Menu
+		      </button>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a href="/merchantprofile/" class="nav-link">Home</a></li>
+                <li class="nav-item active"><a href="/merchant_details_display/" class="nav-link">Hotel</a></li>
+
+<!--                <li class="nav-item"><a href="/merchant_view_feedback/" class="nav-link">Feedbacks</a></li>-->
+
+                <li class="nav-item"><a href="/merchant_view_orders/" class="nav-link">Orders</a></li>
+                <li class="nav-item "><a href="/merchant_view_feedback/" class="nav-link">Feedbacks</a></li>
+                <li class="nav-item"><a href="/merchants_view_notifications/" class="nav-link">Notifications</a></li>
+
+                 <li class="nav-item dropdown">
+                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
+                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Account
+                           </a>
+                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="/merchant_change_password/">Change Password</a>
+                              <a class="dropdown-item" href="/merchant_logout/">Logout</a>
+                           </div>
+                        </li>
+
+            </ul>
+	      </div>
+        </div>
+	  </nav>
+<img src="{% static 'images/food.jpg' %}" height="500px" width="100%" />
+<br>
+<br>
+  <center><h3> FOOD UPDATE</h3></center>
+
+  <section class="ftco-section contact-section">
+      <div class="container ">
+        <div class="row block-9">
+			<div class="col-md-6 ftco-animate">
+            <form action="{%  url 'food_update' %}" class="contact-form" method="post" enctype="multipart/form-data">
+				<h2>Update Food Here</h2>
+				{% csrf_token %}
+
+                <div class="form-group">
+               <label>Enter Hotel Owner Id:</label>
+	                <div class="form-group">
+	                  <input type="text" class="form-control" name="merchant" value="{{foods.merchant.id}}" readonly placeholder="Hotel Id">
+	                </div>
+                </div>
+
+                <div class="form-group">
+               <label>Enter Hotel Id:</label>
+	                <div class="form-group">
+	                  <input type="text" class="form-control" name="id" value="{{foods.id}}" placeholder="Hotel name" readonly>
+	                </div>
+                </div>
+                 <div class="form-group">
+               <label>Enter Food name:</label>
+	                <div class="form-group">
+	                  <input type="text" class="form-control" name="foodname" value="{{foods.foodname}}" placeholder="Food Name" required>
+	                </div>
+                </div>
+
+
+                <div class="form-group">
+    <label for="type">Food Type:</label>
+    <select name="type" id="type" class="form-control" required>
+        <option value="nonveg" style="color:black" {% if foods.type == "nonveg" %}selected{% endif %}>Non Veg</option>
+        <option value="veg" style="color:black" {% if foods.type == "veg" %}selected{% endif %}>Veg</option>
+    </select>
+</div>
+
+
+                <div class="form-group">
+               <label>Food Image:</label>
+	                <div class="form-group">{{foods.image}}
+	                  <input type="file" class="form-control" name="image"  placeholder="Img">
+	                </div>
+                </div>
+
+                 <div class="form-group">
+               <label>Enter Cost:</label>
+	                <div class="form-group">
+	                  <input type="number" class="form-control" name="cost" value="{{foods.cost}}" placeholder="Cost" required>
+	                </div>
+                </div>
+
+                <div class="form-group">
+               <label>Enter Discount:</label>
+	                <div class="form-group">
+	                  <input type="number" class="form-control" name="discount" value="{{foods.discount}}" placeholder="Discount" required>
+	                </div>
+                </div>
+                <div class="form-group">
+               <label>Enter Description:</label>
+	                <div class="form-group">
+                        <textarea name="description" id="description" class="form-group" placeholder="About Food" rows="7" cols="70" required>{{foods.description}}</textarea>
+	                </div>
+                </div>
+                 <div class="form-group">
+    <label for="category">Category:</label>
+    <select name="categoty" id="category" class="form-control" required>
+        <option value="shawarma" style="color:black" {% if foods.categoty == "shawarma" %}selected{% endif %}>Shawarma</option>
+        <option value="manchurian" style="color:black" {% if foods.categoty == "manchurian" %}selected{% endif %}>Manchurian</option>
+        <option value="fastfood" style="color:black" {% if foods.categoty == "fastfood" %}selected{% endif %}>Fast Food</option>
+        <option value="freaky" style="color:black" {% if foods.categoty == "freaky" %}selected{% endif %}>Freaky</option>
+        <option value="others" style="color:black" {% if foods.categoty == "others" %}selected{% endif %}>Others</option>
+    </select>
+</div>
+              <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary py-3 px-5">{{msg}}
+              </div>
+            </form>
+	  </div>
+		</div></div>
+    </section>
+</html>
+
+{% include 'footer.html' %}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>food</title>
+   <title>Food</title>
+</head>
+{% load static %}
+{% include 'header.html' %}
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+		      <a class="navbar-brand" href=""><span class="flaticon-pizza-1 mr-1"></span>Street Food<br><small>Delivery System</small></a>
+		      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+		        <span class="oi oi-menu"></span> Menu
+		      </button>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item"><a href="/merchant_details_display/" class="nav-link">Hotel</a></li>
+                <li class="nav-item "><a href="/merchant_view_feedback/" class="nav-link">Feedbacks</a></li>
+	          <li class="nav-item"><a href="/merchant_change_password/" class="nav-link">Change Password</a></li>
+                <li class="nav-item"><a href="/merchant_view_orders/" class="nav-link">View Orders</a></li>
+                <li class="nav-item"><a href="/merchant_logout/" class="nav-link">Logout</a></li>
+
+	        </ul>
+	      </div>
+        </div>
+	  </nav>
+<body>
+<img src="{% static 'images/edit33.jpg' %}" width="100%" />
+<br><br>
+<table border="1" cellpadding="5" cellspacing="0" style="color:#FFFFFF" width="100%">
+    <thead>
+    <tr>
+        <th>Customer Email</th>
+        <th>Food</th>
+        <th>Address</th>
+        <th>Mobile</th>
+        <th>No.of.packs</th>
+        <th>Cost</th>
+        <th>Discount</th>
+        <th>Total Cost</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for order in orders %}
+    <tr>
+        <td>{{order.customer.email}}</td>
+        <td>{{order.food.foodname}}</td>
+        <td>{{order.add}}</td>
+        <td>{{order.customer.mobile}}</td>
+        <td>{{order.cart}}</td>
+        <td>{{order.cost}}</td>
+        <td>{{order.discount}}</td>
+        <td>{{order.finalcost}}</td>
+
+
+         <td>
+                                 {% if order.stutuss == 1 %}
+                                    <span class="green">Accept</span>
+                                {% elif order.stutuss == 2 %}
+                                    <span class="red">Reject</span>
+                                {% elif order.stutuss == 3 %}
+                                    <span class="black">Delivered</span>
+                                {% elif order.stutuss == 4 %}
+                                    <span class="black">Cancelled</span>
+                                {% else %}
+                                    <span class="black">Pending</span>
+
+                                {% endif %}
+            </td>
+            <td>
+			                    {% if order.stutuss == 0 %}
+                                <a href="{% url 'approve_slot' food_id=order.id %}" class="btn btn-success" >Accept</a>
+                                <a class="btn btn-danger " href="{% url 'reject_slot' food_id=order.id %}" >Reject</a>
+                                {% elif order.stutuss == 1  %}
+                                 <button class="btn btn-warning " disabled="disabled" data-toggle="modal" data-target="#reply_modal">OrderAccepted</button>
+                                {% elif order.stutuss == 2  %}
+                                <button class="btn btn-danger" disabled="disabled" data-toggle="modal" data-target="#reply_modal">OrderRejected</button>
+                {% elif order.stutuss == 3  %}
+                                 <button class="btn btn-danger" disabled="disabled" data-toggle="modal" data-target="#reply_modal">Delivered</button>
+
+                {% else %}
+                {% endif %}
+                            </td>
+
+          <td>
+                    {% if order.stutuss == 1  %}
+                    <a href="{% url 'delivered_slot' food_id=order.id %}" class="btn btn-danger" >Delivered</a>
+                        {% elif order.stutuss == 3  %}
+
+                        {% elif order.stutuss == 2  %}
+
+
+                        {% else %}
+
+                        {% endif%}
+                        </td>
+
+        {% empty %}
+        No Bookings
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>
+{% include 'footer.html' %}

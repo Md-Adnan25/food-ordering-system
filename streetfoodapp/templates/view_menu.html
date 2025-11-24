@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <link rel="icon" href="{% static 'images/bg_1.png' %}" type="image/x-icon">
+    <title> Street Food Ordering System</title>
+
+    <style>
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+        }
+        .card {
+            background-color: #333;
+            color: #FFFFFF;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            padding: 15px;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card img {
+            border-radius: 8px;
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+        .card h3, .card p {
+            margin: 5px 0;
+        }
+        .card a {
+            display: block;
+            background-color: #ff4d4d;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .card a:hover {
+            background-color: #e43c3c;
+        }
+
+        /* Styling for the search section */
+        .search-form {
+            margin-top: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            width: 70%;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 2px solid #ff4d4d;
+            background-color: #333;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #ff1a1a;
+        }
+
+        .search-button {
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-button:hover {
+            background-color: #e43c3c;
+        }
+
+        @media (max-width: 768px) {
+            .search-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .search-input {
+                width: 80%;
+            }
+
+            .search-button {
+                width: 80%;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+  {% include 'header.html' %}
+  	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+		      <a class="navbar-brand" href=""><span class="flaticon-pizza-1 mr-1"></span>Street Food<br><small>Ordering System</small></a>
+		      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+		        <span class="oi oi-menu"></span> Menu
+		      </button>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+               <li class="nav-item"><a href="/customerprofile/" class="nav-link">Home</a></li>
+                <li class="nav-item dropdown">
+                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
+                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Address
+                           </a>
+                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                             <a class="dropdown-item" href="/add_address/">Add Address</a>
+                              <a class="dropdown-item" href="/customer_view_address/">View Address</a>
+                           </div>
+                        </li>
+                <li class="nav-item"><a href="/customer_view_food/" class="nav-link">Hotels</a></li>
+                <li class="nav-item"><a href="/customer_view_order/" class="nav-link">My Cart</a></li>
+                <li class="nav-item"><a href="/customer_view_orders/" class="nav-link">View Orders</a></li>
+                <li class="nav-item"><a href="/customers_view_notifications/" class="nav-link">Notifications</a></li>
+                <li class="nav-item dropdown">
+                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Profile
+                           </a>
+                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                             <a class="dropdown-item" href="/customer_details_display/">My Details</a>
+                              <a class="dropdown-item" href="/customer_change_password/">Change Password</a>
+                              <a class="dropdown-item" href="/customer_logout/">Logout</a>
+                           </div>
+                        </li>
+	        </ul>
+	      </div>
+		  </div>
+	  </nav>
+
+    <img src="{% static 'images/edit22.jpg' %}" height="400px" width="100%" />
+    <br><br>
+    <center><h1> VIEW MENU</h1></center>
+    <br>
+<center>
+<!--        <h2 style="color:red">Foods</h2>-->
+
+        <form method="post" action="{% url 'search_menus' %}" class="search-form">
+            {% csrf_token %}
+            <div class="search-container">
+                <input type="text" placeholder="Search Foods Names, Categories" name="foods" value="{{ request.POST.foods }}" required class="search-input">
+                <select name="food_type" class="search-input">
+                    <option value="All" {% if selected_type == "All" %}selected{% endif %}>All</option>
+                    <option value="veg" {% if selected_type == "veg" %}selected{% endif %}>Veg</option>
+                    <option value="nonveg" {% if selected_type == "nonveg" %}selected{% endif %}>Non-Veg</option>
+                </select>
+                <button type="submit" name="Search" class="search-button">Search</button>
+            </div>
+            {{ msg }}
+        </form>
+    </center>
+
+    <div class="card-container">
+        {% if foods %}
+            {% for food in foods %}
+            <div class="card">
+                <img src="{{ food.image.url }}" alt="Food Image">
+                <h3 style="color:black">{{ food.foodname }}</h3>
+                <p style="color:black"><strong>Type:</strong> {{ food.type }}</p>
+<!--                <p style="color:black"><strong>Hotel:</strong> {{ food.merchant }}</p>-->
+                <p style="color:black"><strong>Cost:</strong> {{ food.cost }}</p>
+                <p style="color:black"><strong>Discount:</strong> {{ food.discount }}</p>
+                <p style="color:black"><strong>Description:</strong> {{ food.description }}</p>
+                <p style="color:black"><strong>Category:</strong> {{ food.foodname }}</p>
+                <a href="/customer_order_food/{{ food.id }}">Add To Cart</a>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p style="text-align:center; color:#FFFFFF;">No food items available</p>
+        {% endif %}
+    </div>
+
+    {% include 'footer.html' %}
+</body>
+</html>

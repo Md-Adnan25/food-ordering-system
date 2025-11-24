@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    	      <link rel="icon" href="{% static 'images/bg_1.png' %}" type="image/x-icon">
+
+    <title> Street Food Ordering System</title>
+</head>
+ {% include 'header.html' %}
+  	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+		      <a class="navbar-brand" href=""><span class="flaticon-pizza-1 mr-1"></span>Street Food<br><small>Ordering System</small></a>
+		      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+		        <span class="oi oi-menu"></span> Menu
+		      </button>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+	          <li class="nav-item"><a href="/menu/" class="nav-link">Menu</a></li>
+	          <li class="nav-item"><a href="/about/" class="nav-link">About</a></li>
+	          <li class="nav-item "><a href="/contact/" class="nav-link">Contact</a></li>
+                <li class="nav-item active"><a href="/merchant/" class="nav-link">Merchant</a></li>
+	          <li class="nav-item"><a href="/customer/" class="nav-link">Customer</a></li>
+                	          <li class="nav-item"><a href="/admin_login/" class="nav-link">Admin</a></li>
+
+	        </ul>
+	      </div>
+		  </div>
+	  </nav>
+
+  <section class="home-slider owl-carousel img" style="background-image: url({% static 'images/about.jpg' %});" >
+
+      <div class="slider-item" style="background-image: url({% static 'images/about.jpg' %});">
+      	<div class="overlay"></div>
+        <div class="container">
+          <div class="row slider-text justify-content-center align-items-center">
+
+            <div class="col-md-7 col-sm-12 text-center ftco-animate">
+            	<h1 class="mb-3 mt-5 bread">Merchant Registration</h1>
+<!--	            <p class="breadcrumbs"><span class="mr-2"><a href="/">Home</a></span> <span>Contact</span></p>-->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <br>
+
+<!--<img src="{% static 'images/change.jpg' %}" width="100%" height="700px" />-->
+
+ <section class="m-5 p-3">
+      <div class="container ">
+        <div class="row block-9">
+            <div class="col-md-6 ftco-animate">
+              <div style="color:yellow">  {{msg}}</div>
+            <form action="{% url 'merchant_register' %}" class="contact-form" method="post" enctype="multipart/form-data">
+                <h2>Registration Here</h2>
+				{% csrf_token %}
+
+                <div class="form-group">
+                    <label>Enter Contact Name</label>
+                    <input type="text" class="form-control" name="fullname" placeholder="Your Full Name" required>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Enter Mobile Number</label>
+                    <input type="text" class="form-control" pattern="[6-9]{1}[0-9]{9}" title="give the correct number" name="mobile" placeholder="Your Mobile Number" required>
+                </div>
+
+              <div class="form-group">
+                  <label>Enter Your City </label>
+                <input type="text" class="form-control" name="city" placeholder="City" required>
+              </div>
+
+                <div class="form-group">
+                  <label>Enter Your Email </label>
+                <input type="email" class="form-control" name="email" placeholder="your Email" required>
+              </div>
+
+
+                <div class="form-group">
+                  <label>Enter your Password </label>
+                <input type="password" class="form-control" name="password" placeholder="Your Password" required>
+              </div>
+
+                <div class="form-group">
+               <label>Enter Hotel Name:</label>
+	                <div class="form-group">
+	                  <input type="text" class="form-control" name="hotel" placeholder="Hotel Name" required>
+	                </div>
+                </div>
+
+
+                <div class="form-group">
+               <label>Enter Hotel Image:</label>
+	                <div class="form-group">
+	                  <input type="file" class="form-control" name="img" placeholder="Image" required multiple/>
+	                </div>
+                </div>
+
+
+              <div class="form-group">
+                  <label>Enter Hotel Address</label>
+                <textarea name="address" id=""  cols="30" rows="7" class="form-control" placeholder="Address" required></textarea>
+              </div>
+              <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary py-3 px-5">
+              </div>
+                <p> Already A User ? <a href="{% url 'merchant' %}">Login</a> </p>
+
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+</html>
+
+{% include 'footer.html' %}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	  {% load static %}
+    <title> Street Food Ordering System</title>
+	  	        <link rel="icon" href="{% static 'images/bg_1.png' %}" type="image/x-icon">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <body>
+         {% include 'header.html' %}
+
+  	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+		      <a class="navbar-brand" href=""><span class="flaticon-pizza-1 mr-1"></span>Street Food<br><small>Ordering System</small></a>
+		      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+		        <span class="oi oi-menu"></span> Menu
+		      </button>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+	          <li class="nav-item active"><a href="/menu/" class="nav-link">Menu</a></li>
+	          <li class="nav-item"><a href="/about/" class="nav-link">About</a></li>
+	          <li class="nav-item"><a href="/contact/" class="nav-link">Contact</a></li>
+				<li class="nav-item "><a href="/merchant/" class="nav-link">Merchant</a></li>
+	          <li class="nav-item"><a href="/customer/" class="nav-link">Customer</a></li>
+	          <li class="nav-item"><a href="/admin_login/" class="nav-link">Admin</a></li>
+	        </ul>
+	      </div>
+		  </div>
+	  </nav>
+    <!-- END nav -->
+
+    <section class="home-slider owl-carousel img" style="background-image: url({% static 'images/bg_1.jpg' %});">
+
+      <div class="slider-item" style="background-image: url({% static 'images/bg_3.jpg' %});">
+      	<div class="overlay"></div>
+        <div class="container">
+          <div class="row slider-text justify-content-center align-items-center">
+
+            <div class="col-md-7 col-sm-12 text-center ftco-animate">
+            	<h1 class="mb-3 mt-5 bread">Our Menu</h1>
+	            <p class="breadcrumbs"><span class="mr-2"><a href="/">Home</a></span> <span>Menu</span></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+	<br>
+
+
+
+
+
+	    <section class="ftco-section">
+
+    	<div class="container">
+    		<div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section ftco-animate text-center">
+            <h2 class="mb-4">Testy Street Food</h2>
+            <p>The meal tonight was very tasty. You've done a great job. Thanks very much, you cooked that meal to perfection.</p>
+          </div>
+        </div>
+    	</div>
+
+    	<div class="container-wrap">
+
+    		<div class="row no-gutters d-flex">
+{% for food in foods %}
+    			<div class="col-lg-4 d-flex ftco-animate">
+
+    				<div class="services-wrap d-flex">
+<img src="{{food.image.url}}" class="img-responsive" width="250px" height="220px">
+    					<div class="text p-4">
+    						<h3>{{food.foodname}}</h3>
+    						<p>When you eat food with your family and friends, it always tastes better!</p>
+    						<p class="price"><span>{{food.cost}}₹</span> <a href="{% url 'customer' %}" class="ml-2 btn btn-white btn-outline-white">Order</a></p>
+    					</div>
+    				</div>
+    			</div>
+{% endfor %}
+			</div>
+		</div>
+
+
+	</section>
+
+
+    
+
+
+  </body></html>
+<br>
+<br>
+
+       {% include 'footer.html' %}

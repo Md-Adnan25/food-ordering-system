@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title> Street Food Ordering System</title>
+        <link rel="icon" href="{% static 'images/bg_1.png' %}" type="image/x-icon">
+
+</head>
+    {% include 'header.html' %}
+
+<body>
+
+      <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+		      <a class="navbar-brand" href=""><span class="flaticon-pizza-1 mr-1"></span>Street Food<br><small>Ordering System</small></a>
+		      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="oi oi-menu"></span> Menu
+		      </button>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item"><a href="/customerprofile/" class="nav-link">Home</a></li>
+
+<!--                <li class="nav-item active"><a href="/customer_details_display/" class="nav-link">MyDetails</a></li>-->
+<!--                <li class="nav-item"><a href="/customer_change_password/" class="nav-link">Changepassword</a></li>-->
+
+                <li class="nav-item dropdown">
+                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Address
+                           </a>
+                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                             <a class="dropdown-item" href="/add_address/">Add Address</a>
+                              <a class="dropdown-item" href="/customer_view_address/">View Address</a>
+                           </div>
+                        </li>
+<!--                <li class="nav-item"><a href="/add_address/" class="nav-link">Add Address</a></li>-->
+<!--                <li class="nav-item"><a href="/customer_view_address/" class="nav-link">View Address</a></li>-->
+                <li class="nav-item"><a href="/customer_view_food/" class="nav-link">Hotels</a></li>
+                <li class="nav-item"><a href="/customer_view_order/" class="nav-link">My Cart</a></li>
+                <li class="nav-item"><a href="/customer_view_orders/" class="nav-link">View Orders</a></li>
+                <li class="nav-item"><a href="/customers_view_notifications/" class="nav-link">Notifications</a></li>
+<!--	          <li class="nav-item"><a href="/customer_logout/" class="nav-link">Logout</a></li>-->
+                <li class="nav-item dropdown">
+                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
+                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Profile
+                           </a>
+                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                             <a class="dropdown-item" href="/customer_details_display/">My Details</a>
+                              <a class="dropdown-item" href="/customer_change_password/">Change Password</a>
+                              <a class="dropdown-item" href="/customer_logout/">Logout</a>
+                           </div>
+                        </li>
+
+
+	        </ul>
+	      </div>
+		  </div>
+	  </nav>
+
+<img src="{% static 'images/321.jpg' %}" width="100%" height="500px"/>
+<br><br>
+                    <center><h3>  MY PROFILE</h3></center>
+
+<div class="container">
+
+
+<table class="table table-bordered table-hover table-dark" cellpadding="10" cellspacing="0">
+                <thead class="thead-light">
+                    <tr>
+        <th>Full Name</th>
+        <th>Mobile</th>
+        <th>City</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Update</th>
+<!--        <th>Delete</th>-->
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{customer.fullname}}</td>
+        <td>{{customer.mobile}}</td>
+        <td>{{customer.city}}</td>
+        <td>{{customer.email}}</td>
+        <td>{{customer.address}}</td>
+        <td><a href="/customer_edit/{{customer.email}}">Update</a></td>
+<!--		<td><a href="/customer_delete/{{customer.email}}" onclick="return confirm('really want delete?');">Delete</a></td>-->
+    </tr>
+    </tbody>
+</table>
+    </div>
+
+      <br><br>
+
+{% include 'footer.html' %}
+</body>
+</html>
+

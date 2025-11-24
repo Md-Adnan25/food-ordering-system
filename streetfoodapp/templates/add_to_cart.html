@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <link rel="icon" href="{% static 'images/bg_1.png' %}" type="image/x-icon">
+    <title> Street Food Ordering System</title>
+</head>
+{% include 'header.html' %}
+  	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+		      <a class="navbar-brand" href=""><span class="flaticon-pizza-1 mr-1"></span>Street Food<br><small>Ordering System</small></a>
+		      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+		        <span class="oi oi-menu"></span> Menu
+		      </button>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item"><a href="/customerprofile/" class="nav-link">Home</a></li>
+
+<!--                <li class="nav-item active"><a href="/customer_details_display/" class="nav-link">MyDetails</a></li>-->
+<!--                <li class="nav-item"><a href="/customer_change_password/" class="nav-link">Changepassword</a></li>-->
+
+                <li class="nav-item dropdown">
+                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Address
+                           </a>
+                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                             <a class="dropdown-item" href="/add_address/">Add Address</a>
+                              <a class="dropdown-item" href="/customer_view_address/">View Address</a>
+                           </div>
+                        </li>
+<!--                <li class="nav-item"><a href="/add_address/" class="nav-link">Add Address</a></li>-->
+<!--                <li class="nav-item"><a href="/customer_view_address/" class="nav-link">View Address</a></li>-->
+                <li class="nav-item"><a href="/customer_view_food/" class="nav-link">Hotels</a></li>
+                <li class="nav-item"><a href="/customer_view_order/" class="nav-link">My Cart</a></li>
+                <li class="nav-item"><a href="/customer_view_orders/" class="nav-link">View Orders</a></li>
+                <li class="nav-item"><a href="/customers_view_notifications/" class="nav-link">Notifications</a></li>
+<!--	          <li class="nav-item"><a href="/customer_logout/" class="nav-link">Logout</a></li>-->
+                <li class="nav-item dropdown">
+                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
+                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Profile
+                           </a>
+                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                             <a class="dropdown-item" href="/customer_details_display/">My Details</a>
+                              <a class="dropdown-item" href="/customer_change_password/">Change Password</a>
+                              <a class="dropdown-item" href="/customer_logout/">Logout</a>
+                           </div>
+                        </li>
+
+
+
+	        </ul>
+	      </div>
+		  </div>
+	  </nav>
+
+<body onload="getPrice();" >
+<img src="{% static 'images/edit22.jpg' %}" height="500px" width="100%" />
+<br>
+<br>
+  <center><h3> ADD TO CART</h3></center>
+
+<!--  <section class="m-5 p-3">-->
+
+ <section class="m-5 p-3">
+      <div class="container ">
+        <div class="row block-9">
+			<div class="col-md-6 ftco-animate">
+            <form action="" class="contact-form" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+                <h6 style="color:red">{{msg}}</h6>
+
+
+               <div class="form-group">
+               <label> Hotel Name:</label>
+	                <div class="form-group">
+	                  <input type="text" class="form-control" name="hotel"  value="{{merchant}}" placeholder=" name" readonly>
+	                </div>
+                </div>
+
+
+				 <div class="form-group">
+               <label>Customer Id</label>
+	                <div class="form-group">
+	                  <input type="text" class="form-control" name="customer" value="{{customer}}" placeholder="name" readonly>
+	                </div>
+                </div>
+
+
+               <div class="form-group">
+               <label>Food Id:</label>
+	                <div class="form-group">
+	                  <input type="text" class="form-control" name="food" value="{{food}}" placeholder=" name" readonly >
+	                </div>
+                </div>
+
+
+<div class="form-group">
+               <label>Food Name:</label>
+	                <div class="form-group">
+	                  <input type="text" class="form-control" name="foodname"  id="foodname" value="{{foodname}}" placeholder="food name" required readonly>
+	                </div>
+                </div>
+
+				<div class="form-group">
+               <label> Food Type:</label>
+	                <div class="form-group">
+	                  <input type="text" class="form-control" name="type"  id="type" value="{{type}}" placeholder="food name" required readonly>
+	                </div>
+                </div>
+
+				<div class="form-group">
+               <label>Image:</label>
+	                <div class="form-group">
+                           <img src="{{image}}" height="180px" width="180px" >	</div>
+                </div>
+
+
+
+              <div class="form-group">
+				  <label>Add to cart</label>
+              <input type="button" onclick="decrementValue()" required readonly value="-" />
+             <input type="text" name="cart" value="1" maxlength="2" max="10" size="1" id="number" />
+               <input type="button" onclick="incrementValue();" value="+"/>
+                </div>
+
+
+
+               <div class="form-group">
+               <label>Cost:</label>
+	                <div class="form-group">
+	                  <input type="text" class="form-control" id="cost" value="{{cost}}" name="cost" placeholder="Cost" required readonly>
+	                </div>
+                </div>
+
+                 <div class="form-group">
+               <label>Discount:</label>
+	                <div class="form-group">
+	                  <input type="text" class="form-control" name="discount"  id="discount" value="{{dis}}" placeholder="Discount" required readonly >
+	                </div>
+                </div>
+
+                 <div class="form-group">
+               <label>Final Cost:</label>
+	                <div class="form-group">
+	                  <input type="text" class="form-control" id="total" name="finalcost" placeholder="Total cost"  readonly>
+	                </div>
+                </div>
+
+              <div class="form-group">
+                <input type="submit" value="Add To Cart" class="btn btn-primary py-3 px-5">
+              </div>
+				<div> </div>
+			</form></div></div></div></section>
+</body>
+</html>
+{% include 'footer.html' %}
+
+<script>
+	 function  getPrice()
+	 {
+		var numVal1 = Number(document.getElementById("cost").value);
+		var numVal2 = Number(document.getElementById("discount").value);
+		var totalValue = numVal1 - numVal2
+		document.getElementById("total").value = totalValue;
+
+	}
+
+function incrementValue()
+{
+    var value = parseInt(document.getElementById('number').value, 10);
+    value = isNaN(value) ? 0 : value;
+    if(value<10){
+        value++;
+            document.getElementById('number').value = value;
+			var cost=parseInt(document.getElementById('cost').value);
+			var discount=parseInt(document.getElementById('discount').value);
+			var totalcost=cost*value-discount*value;
+			document.getElementById("total").value=totalcost;
+
+    }
+}
+function decrementValue()
+{
+    var value = parseInt(document.getElementById('number').value, 10);
+    value = isNaN(value) ? 0 : value;
+    if(value>1){
+        value--;
+            document.getElementById('number').value = value;
+            var cost=parseInt(document.getElementById('cost').value);
+			var discount=parseInt(document.getElementById('discount').value);
+			var totalcost=cost*value-discount*value;
+			document.getElementById("total").value=totalcost;
+
+    }
+
+}
+</script>
+
+
