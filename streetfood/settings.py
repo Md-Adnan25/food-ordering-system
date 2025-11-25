@@ -77,8 +77,8 @@ WSGI_APPLICATION = 'streetfood.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default='sqlite:///db.sqlite3'
+    'default': dj_database_url.parse(
+        os.environ.get("DATABASE_URL")
     )
 }
 
