@@ -1,10 +1,9 @@
 services:
   - type: web
-    name: streetfood
+    name: food-ordering-system-1
     env: python
     buildCommand: "./render-build.sh"
     startCommand: "gunicorn streetfood.wsgi:application"
     plan: free
-    envVars:
-      - key: DATABASE_URL
-        sync: false
+    autoDeploy: true
+
