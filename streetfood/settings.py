@@ -131,4 +131,12 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media/')
 MEDIA_URL='/media/'
+import os
+import dj_database_url
+
+ALLOWED_HOSTS = ['*']
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+DATABASES['default'] = dj_database_url.config(default=DATABASES['default'])
 
